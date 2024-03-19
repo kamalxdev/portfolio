@@ -17,7 +17,7 @@ export default function Home() {
             autoPlay
             loop
             muted
-            className="h-screen w-screen object-cover bg-red-500"
+            className="h-screen w-screen object-cover bg-black"
           >
             <source src="/main.mp4" type="video/mp4" />
           </video>
