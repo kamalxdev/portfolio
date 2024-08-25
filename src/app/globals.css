@@ -32,6 +32,13 @@ body {
   }
 }
 
+
+@font-face {
+  font-family: 'grandslang';
+  src: url(/GrandSlang-Roman.woff);
+}
+
 body{
   overflow: hidden;
+  font-family: "grandslang";
 }
