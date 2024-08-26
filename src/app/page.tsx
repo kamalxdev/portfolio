@@ -148,9 +148,9 @@ export default function Home() {
                 <h1 className=" text-center name opacity-0" id="kamal">Kamal Singh</h1>
               </div>
             </section>
-            <section className="relative text-lg md:text-3xl px-10 2xl:px-72 text-center pb-10  after:content-['About'] after:absolute after:block after:text-9xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content z-20">
+            <section className="relative text-lg md:text-3xl px-10 2xl:px-72 text-center pb-10  after:content-['About'] after:absolute after:block after:text-8xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content z-20">
               <p className=" relative z-10 font-['grandslang']">
-                 I'm a{" "}
+                 I&apos;m a{" "}
                 <i className="underline underline-offset-4 decoration-1">
                   Full Stack Web Developer{" "}
                 </i>
@@ -164,11 +164,11 @@ export default function Home() {
                   IPU University
                 </i>
                 . With a strong foundation in both front-end and back-end
-                technologies, I'm passionate about building dynamic, responsive,
+                technologies, I&apos;m passionate about building dynamic, responsive,
                 and user-friendly web applications.
-                <br /> <br /> Though I’m just starting out in the professional
-                world, I’m eager to find my first opportunity to apply my skills
-                in real-world projects. I’m actively looking for job
+                <br /> <br /> Though I&apos;m just starting out in the professional
+                world, I&apos;m eager to find my first opportunity to apply my skills
+                in real-world projects. I&apos;m actively looking for job
                 opportunities, internships, or freelance projects where I can
                 contribute and grow as a developer.
                 <br /> <br /> I have a keen interest in learning new
@@ -176,7 +176,7 @@ export default function Home() {
                 development.
               </p>
             </section>
-            <section className="relative py-10 w-full h-fit gap-0 flex  justify-center items-center  after:content-['Skills'] after:absolute after:block after:text-9xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content">
+            <section className="relative py-10 w-full h-fit gap-0 flex  justify-center items-center  after:content-['Skills'] after:absolute after:block after:text-8xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content">
                 <div className="relative grid grid-cols-3 md:grid-cols-4 gap-10 rounded-full tech-icons z-20">
                   {tech_icons.map((icon) => (
                     <Image
@@ -185,6 +185,7 @@ export default function Home() {
                       width={100}
                       height={100}
                       key={icon.name}
+                      title={icon.name}
                       className="bg-[#ece7e1] grayscale hover:grayscale-0	 rounded-lg p-2 hover:bg-white hover:p-1 transition-all"
                     />
                   ))}
