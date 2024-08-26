@@ -42,3 +42,13 @@ body{
   overflow: hidden;
   font-family: "grandslang";
 }
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.text-content::after{
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
