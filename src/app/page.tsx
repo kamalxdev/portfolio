@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 import Image from "next/image";
+import { sendMail } from "./sendMail";
 // import SplitText from ""
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -29,6 +30,23 @@ export default function Home() {
       videoRef.current.playbackRate = 0.5;
     }
   }, [videoRef]);
+  const [mail,setMail]=useState({
+    email:"",
+    name:"",
+    message:""
+  })
+  async function handleMessageSend(){
+    const data=await sendMail(mail?.email,mail?.name,mail?.message)
+    setMail({
+      email:"",
+      name:"",
+      message:""
+    })
+    if(data?.info?.accepted){
+      return alert("Message Sent successfully")
+    }
+    return alert("Error in sending message")
+  }
   const d = new Date();
   const nav_links = [
     {
@@ -331,25 +349,32 @@ export default function Home() {
               <form className="flex flex-col w-96 gap-5 items-center justify-center">
                 <input
                   type="text"
+                  value={mail.name}
+                  onChange={(e)=>setMail({...mail,name:e.target.value})}
                   className="relative w-full border rounded border-[#ece7e1] bg-transparent p-1 px-3 outline-0 opacity-50"
                   placeholder="Name"
                 />
                 <input
                   type="email"
+                  value={mail.email}
+                  onChange={(e)=>setMail({...mail,email:e.target.value})}
                   className="relative w-full border rounded border-[#ece7e1] bg-transparent p-1 px-3 outline-0 opacity-50"
                   placeholder="Email"
                 />
                 <textarea
+                  value={mail.message}
                   name=""
                   id=""
                   cols={30}
+                  onChange={(e)=>setMail({...mail,message:e.target.value})}
                   rows={10}
                   className="relative w-full border rounded border-[#ece7e1] bg-transparent p-1 px-3 outline-0 opacity-50"
                   placeholder="Message"
                 ></textarea>
                 <button
                   type="button"
-                  className="border px-7 py-2 hover:bg-[#ece7e1] hover:text-black transition-all"
+                  onClick={handleMessageSend}
+                  className="border font-['grandslang'] px-7 py-2 hover:bg-[#ece7e1] hover:text-black transition-all"
                 >
                   Send
                 </button>
@@ -368,7 +393,7 @@ export default function Home() {
             <hr className="opacity-50"/>
             <section className="relative font-['grandslang'] text-lg flex flex-col items-center justify-center my-10 gap-2">
               <span className="flex gap-5">
-                {social_media.map((sm)=><Link href={sm.link} className="hover:underline transition-all" key={sm.name}>{sm.name}</Link>)}
+                {social_media.map((sm)=><Link href={sm.link} target="_blank" className="hover:underline transition-all" key={sm.name}>{sm.name}</Link>)}
               </span>
                 <p>&copy; {d.getFullYear()} <Link href={'/'} className="underline">Kamal Singh</Link>. All rights reserved</p>
             </section>
