@@ -27,6 +27,7 @@ export async function sendMail(email:string,name:string,message:string) {
     // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
   } catch (error) {
     console.log("Error in sending mail: "), error;
+    return {success:false}
   }
 }
 

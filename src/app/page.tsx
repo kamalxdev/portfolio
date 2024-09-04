@@ -35,16 +35,23 @@ export default function Home() {
     name:"",
     message:""
   })
+  const [loading,setLoading]=useState(false);
   async function handleMessageSend(){
+    if(!mail?.email || !mail?.message || !mail?.name){
+      return alert("Please fill al then details to send a message.");
+    }
+    setLoading(true)
     const data=await sendMail(mail?.email,mail?.name,mail?.message)
     setMail({
       email:"",
       name:"",
       message:""
     })
-    if(data?.info?.accepted){
+    if(data?.success && data?.info?.accepted){
+      setLoading(false)
       return alert("Message Sent successfully")
     }
+    setLoading(false)
     return alert("Error in sending message")
   }
   const d = new Date();
@@ -376,7 +383,7 @@ export default function Home() {
                   onClick={handleMessageSend}
                   className="border font-['grandslang'] px-7 py-2 hover:bg-[#ece7e1] hover:text-black transition-all"
                 >
-                  Send
+                  {loading? "Sending your message...":"Send"}
                 </button>
               </form>
               <span className="flex flex-col items-center justify-center text-2xl font-['grandslang'] mt-5">
