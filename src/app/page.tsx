@@ -38,7 +38,7 @@ export default function Home() {
   const [loading,setLoading]=useState(false);
   async function handleMessageSend(){
     if(!mail?.email || !mail?.message || !mail?.name){
-      return alert("Please fill al then details to send a message.");
+      return alert("Please fill all the details to send a message.");
     }
     setLoading(true)
     const data=await sendMail(mail?.email,mail?.name,mail?.message)
