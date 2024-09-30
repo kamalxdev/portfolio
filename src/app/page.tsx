@@ -7,6 +7,16 @@ import { sendMail } from "./sendMail";
 // import SplitText from ""
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  //ref 
+  const home=useRef<HTMLDivElement>(null);
+  const about=useRef<HTMLDivElement>(null);
+  const projects=useRef<HTMLDivElement>(null);
+  const contact=useRef<HTMLDivElement>(null);
+
+
+
+
   useEffect(() => {
     var t1 = gsap.timeline();
     t1.to(".namaskar", { duration: 1, opacity: 1, y: -50 })
@@ -58,19 +68,22 @@ export default function Home() {
   const nav_links = [
     {
       name: "Home",
-      href: "/",
+      onclick: ()=>(home?.current as HTMLElement)?.scrollIntoView({ behavior: "smooth" }),
     },
     {
       name: "About",
-      href: "#kamal",
+      onclick: ()=>(about?.current as HTMLElement)?.scrollIntoView({ behavior: "smooth" }),
+
     },
     {
       name: "Projects",
-      href: "#projects",
+      onclick: ()=>(projects?.current as HTMLElement)?.scrollIntoView({ behavior: "smooth" }),
+
     },
     {
       name: "Contact",
-      href: "#contact",
+      onclick: ()=>(contact?.current as HTMLElement)?.scrollIntoView({ behavior: "smooth" }),
+
     },
   ];
   const tech_icons = [
@@ -122,6 +135,18 @@ export default function Home() {
       name: "Github",
       src: "/icon/github.svg",
     },
+    {
+      name: "WebSocket",
+      src: "/icon/websocket.svg",
+    },
+    {
+      name: "WebRTC",
+      src: "/icon/webrtc.svg",
+    },
+    {
+      name: "Docker",
+      src: "/icon/docker.svg",
+    },
   ];
   const projects_link = [
     {
@@ -156,7 +181,7 @@ export default function Home() {
       title: "Hubble",
       description:
         "It is a chat application built using WebRTC, WebSocket, and Redis. It provides a comprehensive communication experience with features like text messaging, voice calls, video calls, and real-time status updates, such as live user status and typing indicators. These technologies ensure seamless real-time communication, making Hubble a robust platform for staying connected.",
-      live_url: "#not-live-yet",
+      live_url: "https://hubble.kamalsingh.me/",
       github_url: "https://github.com/kamalxdev/Hubble",
       teck_stack: [
         "HTML",
@@ -209,7 +234,7 @@ export default function Home() {
           </video>
           <section className="relative w-full h-full overflow-y-scroll">
             <section className="relative w-full h-full">
-              <nav className="relative z-50 top-0 left-0 font-['grandslang'] text-xl flex w-full justify-center flex-wrap items-center md:justify-between px-20 border-b border-gray-600 py-5 overflow-hidden">
+              <nav ref={home} className="relative z-50 top-0 left-0 font-['grandslang'] text-xl flex w-full justify-center flex-wrap items-center md:justify-between px-20 border-b border-gray-600 py-5 overflow-hidden">
                 <Image
                   src={"/logo.png"}
                   alt="Kamal Singh"
@@ -219,27 +244,27 @@ export default function Home() {
                 />
                 <div className=" flex gap-4 bg-transparent nav-links opacity-0 translate-y-10">
                   {nav_links.map((link) => (
-                    <Link
-                      href={link.href}
+                    <button
                       className="hover:italic hover:underline decoration-1 underline-offset-4 transition"
                       key={link.name}
+                      onClick={link?.onclick}
                     >
                       {link.name}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </nav>
               <div className="absolute w-full h-full font-['grandslang'] text-xs md:text-sm  opacity-60 flex justify-start items-center -left-16 md:-left-20 bottom-10">
                 <h3 className="-rotate-90">&larr; Swipe down to know more</h3>
               </div>
-              <div className="relative  h-full w-full bg-transparent pb-20 flex justify-center items-end font-['grandslang'] text-9xl lg:text-[12rem] 2xl:text-[15rem] flex-wrap">
+              <div  className="relative  h-full w-full bg-transparent pb-20 flex justify-center items-end font-['grandslang'] text-9xl lg:text-[12rem] 2xl:text-[15rem] flex-wrap">
                 <span id="about"></span>
-                <h1 className=" text-center name opacity-0" id="kamal">
+                <h1 ref={about} className=" text-center name opacity-0" id="kamal">
                   Kamal Singh
                 </h1>
               </div>
             </section>
-            <section className="relative text-lg md:text-3xl px-10 2xl:px-72 text-center pb-10  after:content-['About'] after:absolute after:block after:text-8xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content z-20">
+            <section ref={about} className="relative text-lg md:text-3xl px-10 2xl:px-72 text-center pb-10  after:content-['About'] after:absolute after:block after:text-8xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content z-20">
               <p className=" relative z-10 font-['grandslang']">
                 I&apos;m a{" "}
                 <i className="underline underline-offset-4 decoration-1">
@@ -268,7 +293,7 @@ export default function Home() {
               </p>
             </section>
             <section className="relative py-10 w-full h-fit gap-0 flex  justify-center items-center  after:content-['Skills'] after:absolute after:block after:text-8xl after:bottom-0 after:left-0 after:text-transparent after:opacity-20 after:z-2 text-content">
-              <div className="relative grid grid-cols-3 md:grid-cols-4 gap-10 rounded-full tech-icons z-20">
+              <div className="relative grid grid-cols-3 md:grid-cols-5 gap-10 rounded-full tech-icons z-20">
                 {tech_icons.map((icon) => (
                   <Image
                     src={icon.src}
@@ -284,7 +309,7 @@ export default function Home() {
             </section>
             <section
               className="relative font-['grandslang'] flex flex-col mx-5 xl:mx-20 mt-20 "
-              id="projects"
+              id="projects" ref={projects}
             >
               <h1 className="w-full flex items-center justify-center xl:text-8xl  pb-5 mb-5 border-b">
                 Projects
@@ -324,9 +349,10 @@ export default function Home() {
                       />
                       <span className="flex flex-col justify-around gap-5">
                         <p className="text-lg">{project.description}</p>
-                        <span className="flex gap-3 bg-[#ece7e1] w-fit p-2 px-5 rounded">
+                        <span className="flex gap-3 bg-white w-fit p-2 px-5 rounded">
                           {project.teck_stack.map((stack) => (
                             <Image
+                              title={stack}
                               src={
                                 tech_icons.filter(
                                   (icon) => stack == icon.name
@@ -345,7 +371,7 @@ export default function Home() {
                 ))}
               </div>
             </section>
-            <section className="relative flex flex-col items-center justify-center my-20 text-base" id="contact">
+            <section ref={contact} className="relative flex flex-col items-center justify-center my-20 text-base" id="contact">
               <h1 className="text-5xl font-['grandslang']">Contact me</h1>
               <p className="xl:text-2xl font-['grandslang'] mx-5 xl:mx-64 text-center my-5 mb-10">
                 I&apos;m always excited to connect with like-minded individuals and
@@ -358,14 +384,14 @@ export default function Home() {
                   type="text"
                   value={mail.name}
                   onChange={(e)=>setMail({...mail,name:e.target.value})}
-                  className="relative w-full border rounded border-[#ece7e1] bg-transparent p-1 px-3 outline-0 opacity-50"
+                  className="relative w-full border border-white bg-transparent p-1 px-3 outline-0 opacity-50"
                   placeholder="Name"
                 />
                 <input
                   type="email"
                   value={mail.email}
                   onChange={(e)=>setMail({...mail,email:e.target.value})}
-                  className="relative w-full border rounded border-[#ece7e1] bg-transparent p-1 px-3 outline-0 opacity-50"
+                  className="relative w-full border border-white bg-transparent p-1 px-3 outline-0 opacity-50"
                   placeholder="Email"
                 />
                 <textarea
@@ -375,13 +401,13 @@ export default function Home() {
                   cols={30}
                   onChange={(e)=>setMail({...mail,message:e.target.value})}
                   rows={10}
-                  className="relative w-full border rounded border-[#ece7e1] bg-transparent p-1 px-3 outline-0 opacity-50"
+                  className="relative w-full border border-white bg-transparent p-1 px-3 outline-0 opacity-50"
                   placeholder="Message"
                 ></textarea>
                 <button
                   type="button"
                   onClick={handleMessageSend}
-                  className="border font-['grandslang'] px-7 py-2 hover:bg-[#ece7e1] hover:text-black transition-all"
+                  className="border font-['grandslang'] px-8 py-1 hover:bg-[#ece7e1] hover:text-black transition-all"
                 >
                   {loading? "Sending your message...":"Send"}
                 </button>
